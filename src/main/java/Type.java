@@ -13,7 +13,7 @@ public class Type {
 
     private final List<Particle> particles = new ArrayList<>();
 
-    private HashMap<Integer, AttractionLaw> attractionLaws = new HashMap<>();
+    private final HashMap<Integer, AttractionLaw> attractionLaws = new HashMap<>();
 
     public Type(int id, float hue) {
         this.id = id;

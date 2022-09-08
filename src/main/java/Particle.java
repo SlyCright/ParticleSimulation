@@ -6,11 +6,11 @@ import java.util.Random;
 @Getter
 public class Particle {
 
-    private PVector acceleration = new PVector();
+    private final PVector acceleration = new PVector();
 
-    private PVector velocity = new PVector();
+    private final PVector velocity = new PVector();
 
-    private PVector position;
+    private final PVector position;
 
     public Particle() {
         position = new PVector(
@@ -24,7 +24,7 @@ public class Particle {
 
     public void update() {
         velocity.add(acceleration);
-        velocity.mult(0.9f);
+        velocity.mult(Constants.FRICTION_FACTOR);
         position.add(velocity);
         if (position.x < 0 && velocity.x < 0) {
             velocity.x *= -1;

@@ -6,12 +6,6 @@ import java.util.Random;
 @Getter
 public class AttractionLaw {
 
-    public static final float MIN_DISTANCE_OF_INFLUENCE = 10f;
-
-    public static final float MAX_DISTANCE_OF_INFLUENCE = 150f;
-
-    public static final float MAX_FORCE_FACTOR = 0.4f;
-
     private final float distanceOfInfluence;
 
     private final float attractionFactor;
@@ -22,9 +16,9 @@ public class AttractionLaw {
 
     public AttractionLaw() {
         Random random = new Random();
-        this.distanceOfInfluence = random.nextFloat(MIN_DISTANCE_OF_INFLUENCE, MAX_DISTANCE_OF_INFLUENCE);
-        this.attractionFactor = random.nextFloat(-MAX_FORCE_FACTOR,MAX_FORCE_FACTOR);
-        this.repulsionFactor = -random.nextFloat(-MAX_FORCE_FACTOR,MAX_FORCE_FACTOR);
+        this.distanceOfInfluence = random.nextFloat(Constants.MIN_DISTANCE_OF_INFLUENCE, Constants.MAX_DISTANCE_OF_INFLUENCE);
+        this.attractionFactor = random.nextFloat(0, Constants.MAX_FORCE_FACTOR);
+        this.repulsionFactor = -random.nextFloat(0, Constants.MAX_FORCE_FACTOR);
         m = (attractionFactor - repulsionFactor) / distanceOfInfluence;
         b = (distanceOfInfluence * repulsionFactor) / distanceOfInfluence;
     }

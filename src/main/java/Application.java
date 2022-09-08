@@ -6,13 +6,7 @@ import java.util.List;
 
 public class Application extends PApplet {
 
-    public static final int TYPES_TOTAL = 3;
-
-    public static final int PARTICLES_TOTAL = 600;
-
     public static PApplet processing;
-
-    AttractionLaw attractionLaw;
 
     List<Type> types = new ArrayList<>();
 
@@ -26,10 +20,10 @@ public class Application extends PApplet {
 
     public void setup() {
         processing = this;
-        for (int i = 0; i < TYPES_TOTAL; i++) {
-            float hue = (float) i / (float) TYPES_TOTAL;
+        for (int i = 0; i < Constants.TYPES_TOTAL; i++) {
+            float hue = (float) i / (float) Constants.TYPES_TOTAL;
             Type type = new Type(i, hue);
-            type.generateParticles((int) ((float) PARTICLES_TOTAL / (float) TYPES_TOTAL));
+            type.generateParticles((int) ((float) Constants.PARTICLES_TOTAL / (float) Constants.TYPES_TOTAL));
             types.add(type);
         }
         types.forEach(affective -> types.forEach(affective::generateAttractionLawFor));
