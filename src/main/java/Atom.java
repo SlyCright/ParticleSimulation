@@ -12,10 +12,17 @@ public class Atom {
 
     private final PVector position;
 
-    public Atom() {
+    private final Element element;
+
+    public Atom(Element element) {
+        this.element = element;
         position = new PVector(
                 new Random().nextFloat(Application.processing.width),
                 new Random().nextFloat(Application.processing.height));
+    }
+
+    public void affect(Atom affected) {
+        this.element.affectWithLaw(this, affected);
     }
 
     public void applyForce(PVector force) {

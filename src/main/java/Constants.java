@@ -1,8 +1,8 @@
 public class Constants {
 
-    public static final int TYPES_TOTAL = 3;
+    public static final int ELEMENTS_TOTAL = 3;
 
-    public static final int PARTICLES_TOTAL = 1500;
+    public static final int ATOMS_TOTAL = 1500;
 
     public static final float MIN_DISTANCE_OF_INFLUENCE = 50f;
 
