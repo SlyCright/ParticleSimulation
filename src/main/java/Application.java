@@ -43,6 +43,10 @@ public class Application extends PApplet {
                     particle.getPosition().y,
                     5f));
         });
+    types.forEach(type -> type.getAttractionLaws().values().forEach(AttractionLaw::update));
+
     }
+
+
 
 }

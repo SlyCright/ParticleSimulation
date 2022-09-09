@@ -12,7 +12,7 @@ public class AttractionLaw {
 
     private final float repulsionFactor;
 
-    private final float m, b; // as parameters of slope-intercept form of equation of linear attraction law
+    private float m, b; // as parameters of slope-intercept form of equation of linear attraction law
 
     public AttractionLaw() {
         Random random = new Random();
@@ -38,6 +38,11 @@ public class AttractionLaw {
             return m * distance + b;
         }
         return 0f;
+    }
+
+    public void update() {
+        m += (new Random()).nextFloat() / 1000f - 0.0005f;
+        b += (new Random()).nextFloat() / 1000f - 0.0005f;
     }
 
 }
