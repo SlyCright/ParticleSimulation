@@ -23,7 +23,7 @@ public class AttractionLaw {
         b = (distanceOfInfluence * repulsionFactor) / distanceOfInfluence;
     }
 
-    public void attractParticle(Particle affective, Particle affected) {
+    public void attractParticle(Atom affective, Atom affected) {
         if (affective != affected) {
             PVector sub = PVector.sub(affective.getPosition(), affected.getPosition());
             float distance = sub.mag();

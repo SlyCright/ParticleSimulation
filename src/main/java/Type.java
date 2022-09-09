@@ -11,7 +11,7 @@ public class Type {
 
     private final float hue;
 
-    private final List<Particle> particles = new ArrayList<>();
+    private final List<Atom> atoms = new ArrayList<>();
 
     private final HashMap<Integer, AttractionLaw> attractionLaws = new HashMap<>();
 
@@ -27,20 +27,20 @@ public class Type {
 
     public void generateParticles(int total) {
         for (int i = 0; i < total; i++) {
-            particles.add(new Particle());
+            atoms.add(new Atom());
         }
     }
 
     public void affectType(Type affectedType) {
         int affectedId = affectedType.getId();
         AttractionLaw attractionLaw = this.attractionLaws.get(affectedId);
-        this.particles.forEach(
-                affective -> affectedType.getParticles().forEach(
+        this.atoms.forEach(
+                affective -> affectedType.getAtoms().forEach(
                         affected -> attractionLaw.attractParticle(affective, affected)));
     }
 
     public void update() {
-        particles.forEach(Particle::update);
+        atoms.forEach(Atom::update);
     }
 
 }

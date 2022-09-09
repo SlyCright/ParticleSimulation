@@ -4,7 +4,7 @@ import processing.core.PVector;
 import java.util.Random;
 
 @Getter
-public class Particle {
+public class Atom {
 
     private final PVector acceleration = new PVector();
 
@@ -12,7 +12,7 @@ public class Particle {
 
     private final PVector position;
 
-    public Particle() {
+    public Atom() {
         position = new PVector(
                 new Random().nextFloat(Application.processing.width),
                 new Random().nextFloat(Application.processing.height));

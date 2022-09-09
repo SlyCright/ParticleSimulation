@@ -1,6 +1,7 @@
+
+
 import processing.core.PApplet;
 
-import java.awt.image.ColorModel;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -37,10 +38,10 @@ public class Application extends PApplet {
         types.forEach(Type::update);
         types.forEach(type -> {
             fill(type.getHue(), 1f, 1f);
-            List<Particle> particles = type.getParticles();
-            particles.forEach(particle -> circle(
-                    particle.getPosition().x,
-                    particle.getPosition().y,
+            List<Atom> atoms = type.getAtoms();
+            atoms.forEach(atom -> circle(
+                    atom.getPosition().x,
+                    atom.getPosition().y,
                     5f));
         });
     }
