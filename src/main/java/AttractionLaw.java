@@ -6,19 +6,37 @@ import java.util.Random;
 @Getter
 public class AttractionLaw {
 
-    private final float distanceOfInfluence;
+    private float distanceOfInfluence;
 
-    private final float attractionFactor;
+    private float velocityOfDistanceChange;
 
-    private final float repulsionFactor;
+    private float attractionFactor;
+
+    private float velocityOfAttractionChange;
+
+    private  float repulsionFactor;
+
+    private float velocityOfRepulsionChange;
 
     private float m, b; // as parameters of slope-intercept form of equation of linear attraction law
 
     public AttractionLaw() {
         Random random = new Random();
-        this.distanceOfInfluence = random.nextFloat(Constants.MIN_DISTANCE_OF_INFLUENCE, Constants.MAX_DISTANCE_OF_INFLUENCE);
-        this.attractionFactor = random.nextFloat(0, Constants.MAX_FORCE_FACTOR);
-        this.repulsionFactor = -random.nextFloat(0, Constants.MAX_FORCE_FACTOR);
+        distanceOfInfluence = random.nextFloat(Constants.MIN_DISTANCE_OF_INFLUENCE, Constants.MAX_DISTANCE_OF_INFLUENCE);
+        velocityOfDistanceChange = random.nextFloat(
+                Constants.MIN_OF_VELOCITY_OF_DISTANCE_CHANGE,
+                Constants.MAX_OF_VELOCITY_OF_DISTANCE_CHANGE);
+        if (random.nextBoolean()) velocityOfAttractionChange *= -1f;
+        attractionFactor = random.nextFloat(0, Constants.MAX_FORCE_FACTOR);
+        velocityOfAttractionChange = random.nextFloat(
+                Constants.MIN_OF_VELOCITY_OF_FORCE_CHANGE,
+                Constants.MAX_OF_VELOCITY_OF_FORCE_CHANGE);
+        if (random.nextBoolean()) velocityOfAttractionChange *= -1f;
+        repulsionFactor = -random.nextFloat(0, Constants.MAX_FORCE_FACTOR);
+        velocityOfRepulsionChange = random.nextFloat(
+                Constants.MIN_OF_VELOCITY_OF_FORCE_CHANGE,
+                Constants.MAX_OF_VELOCITY_OF_FORCE_CHANGE);
+        if (random.nextBoolean()) velocityOfRepulsionChange *= -1f;
         m = (attractionFactor - repulsionFactor) / distanceOfInfluence;
         b = (distanceOfInfluence * repulsionFactor) / distanceOfInfluence;
     }
@@ -41,8 +59,52 @@ public class AttractionLaw {
     }
 
     public void update() {
-        m += (new Random()).nextFloat() / 1000f - 0.0005f;
-        b += (new Random()).nextFloat() / 1000f - 0.0005f;
+        updateDistanceOfInfluence();
+        updateAttractionForce();
+        updateRepulsionForce();
+        m = (attractionFactor - repulsionFactor) / distanceOfInfluence;
+        b = (distanceOfInfluence * repulsionFactor) / distanceOfInfluence;
+    }
+
+    private void updateDistanceOfInfluence() {
+        distanceOfInfluence += velocityOfDistanceChange;
+        if (distanceOfInfluence < Constants.MIN_DISTANCE_OF_INFLUENCE && velocityOfDistanceChange < 0) {
+            velocityOfDistanceChange = new Random().nextFloat(
+                    Constants.MIN_OF_VELOCITY_OF_DISTANCE_CHANGE,
+                    Constants.MAX_OF_VELOCITY_OF_DISTANCE_CHANGE);
+        }
+        if (distanceOfInfluence > Constants.MAX_DISTANCE_OF_INFLUENCE && velocityOfDistanceChange > 0) {
+            velocityOfDistanceChange = -(new Random()).nextFloat(
+                    Constants.MIN_OF_VELOCITY_OF_DISTANCE_CHANGE,
+                    Constants.MAX_OF_VELOCITY_OF_DISTANCE_CHANGE);
+        }
+    }
+    private void updateAttractionForce() {
+        attractionFactor += velocityOfAttractionChange;
+        if (attractionFactor < 0 && velocityOfAttractionChange < 0) {
+            velocityOfAttractionChange = new Random().nextFloat(
+                    Constants.MIN_OF_VELOCITY_OF_FORCE_CHANGE,
+                    Constants.MAX_OF_VELOCITY_OF_FORCE_CHANGE);
+        }
+        if (attractionFactor > Constants.MAX_FORCE_FACTOR && velocityOfAttractionChange > 0) {
+            velocityOfAttractionChange = -(new Random()).nextFloat(
+                    Constants.MIN_OF_VELOCITY_OF_FORCE_CHANGE,
+                    Constants.MAX_OF_VELOCITY_OF_FORCE_CHANGE);
+        }
+    }
+
+    private void updateRepulsionForce() {
+        repulsionFactor += velocityOfRepulsionChange;
+        if (repulsionFactor < -Constants.MAX_FORCE_FACTOR && velocityOfRepulsionChange < 0f) {
+            velocityOfRepulsionChange = new Random().nextFloat(
+                    Constants.MIN_OF_VELOCITY_OF_FORCE_CHANGE,
+                    Constants.MAX_OF_VELOCITY_OF_FORCE_CHANGE);
+        }
+        if (repulsionFactor > 0f && velocityOfRepulsionChange > 0) {
+            velocityOfRepulsionChange = -(new Random()).nextFloat(
+                    Constants.MIN_OF_VELOCITY_OF_FORCE_CHANGE,
+                    Constants.MAX_OF_VELOCITY_OF_FORCE_CHANGE);
+        }
     }
 
 }

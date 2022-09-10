@@ -38,15 +38,11 @@ public class Application extends PApplet {
         types.forEach(type -> {
             fill(type.getHue(), 1f, 1f);
             List<Particle> particles = type.getParticles();
-            particles.forEach(particle -> circle(
-                    particle.getPosition().x,
-                    particle.getPosition().y,
-                    5f));
+            particles.forEach(particle -> {
+                circle(particle.getPosition().x, particle.getPosition().y, 5f);
+            });
         });
-    types.forEach(type -> type.getAttractionLaws().values().forEach(AttractionLaw::update));
-
+        types.forEach(type -> type.getAttractionLaws().values().forEach(AttractionLaw::update));
     }
-
-
 
 }
