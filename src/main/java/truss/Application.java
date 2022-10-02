@@ -11,7 +11,9 @@ import java.util.OptionalDouble;
 
 public class Application extends PApplet {
 
-    public static final float GRAVITY_FORCE=0.01f;
+    public static final float GRAVITY_FORCE_MAGNITUDE =0.01f;
+
+    public static final PVector GRAVITY_FORCE = new PVector(0f, GRAVITY_FORCE_MAGNITUDE);
     public static final float FREEZE_DISTANCE_RATIO = 0.25f;
 
     public static float FREEZE_DISTANCE;
