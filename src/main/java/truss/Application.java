@@ -11,6 +11,10 @@ import java.util.OptionalDouble;
 
 public class Application extends PApplet {
 
+    public static final float FREEZE_DISTANCE_RATIO = 0.25f;
+
+    public static float FREEZE_DISTANCE;
+
     private static final int POPULATION_SIZE = 100;
 
     public static PApplet processing;
@@ -18,10 +22,6 @@ public class Application extends PApplet {
     private List<Specimen> species = new ArrayList<>();
 
     private Specimen showSpecimen;
-
-    private List<Integer> drawTimes = new LinkedList<>();
-
-    private float screenRatio;
 
     public static void main(String[] args) {
         PApplet.main("truss.Application", args);
@@ -34,8 +34,8 @@ public class Application extends PApplet {
     public void setup() {
         processing = this;
         colorMode(HSB, 1f);
-        screenRatio = (float) processing.width / (float) processing.height;
-        species = makeNextGeneration(0f, 0f);
+        FREEZE_DISTANCE = processing.width * FREEZE_DISTANCE_RATIO;
+        species = makeNextGeneration(0.1f, 20f);
         showSpecimen = species.get(0);
         stroke(1f);
         fill(1f);
@@ -45,7 +45,6 @@ public class Application extends PApplet {
         List<Specimen> species = new ArrayList<>();
         for (int i = 0; i < POPULATION_SIZE; i++) {
             species.add(new Specimen(load, distance, null));
-
         }
         return species;
     }
