@@ -11,6 +11,7 @@ import java.util.OptionalDouble;
 
 public class Application extends PApplet {
 
+    public static final float GRAVITY_FORCE=0.01f;
     public static final float FREEZE_DISTANCE_RATIO = 0.25f;
 
     public static float FREEZE_DISTANCE;
@@ -50,8 +51,8 @@ public class Application extends PApplet {
     }
 
     public void draw() {
-        background(0f);
         showSpecimen.update();
+        background(0f);
         showSpecimen.draw();
     }
 

@@ -80,10 +80,10 @@ public class Specimen {
     public void draw() {
         Application.processing.noStroke();
         Application.processing.fill(0f, 0f, 0.125f);
+        Application.processing.rect(0f, 0f, Application.FREEZE_DISTANCE,Application.processing.height);
         Application.processing.stroke(1f);
         graph.forEach(Beam::draw);
         Application.processing.noStroke();
-        Application.processing.rect(0f, 0f, Application.FREEZE_DISTANCE,Application.processing.height);
         joints.forEach(Joint::draw);
     }
 
